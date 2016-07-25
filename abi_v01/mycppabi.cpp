@@ -15,20 +15,20 @@ extern "C" {
 
 void* __cxa_allocate_exception(size_t thrown_size)
 {
-    printf("alloc ex %i\n", thrown_size);
+    printf("alloc ex %u, &exception_buff: %p\n", thrown_size, &exception_buff);
     if (thrown_size > EXCEPTION_BUFF_SIZE) printf("Exception too big");
     return &exception_buff;
 }
 
 void __cxa_free_exception(void *thrown_exception);
 
-#include <unwind.h>
+// #include <unwind.h>
 void __cxa_throw(
           void* thrown_exception,
           struct type_info *tinfo,
           void (*dest)(void*))
 {
-    printf("throw\n");
+    printf("throw ## thrown_exception: %p\n", thrown_exception);
     // __cxa_throw never returns
     exit(0);
 }
